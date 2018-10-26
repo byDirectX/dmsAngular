@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'dmsAngular';
+  title = 'Document management system';
+  description = 'System for managment document';
 }
