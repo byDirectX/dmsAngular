@@ -4,10 +4,6 @@ import { Document } from '../model/document';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// const httpOptions = {
-//     headers: new HttpHeaders( { 'Content-Type': 'application/json' } )
-// }
-
 @Injectable({
     providedIn: 'root'
 })
@@ -27,12 +23,7 @@ export class DocumentService {
     }
 
     getDocument(id: number) {
-        const headers = new HttpHeaders();
-        headers.append('Access-Control-Allow-Headers', 'Content-Type');
-        headers.append('Access-Control-Allow-Methods', 'GET');
-        headers.append('Access-Control-Allow-Origin', '*');
-
-        return this.http.get<Document>(this.baseUrl + '/' + id, { headers: headers });
+        return this.http.get<Document>(this.baseUrl + '/' + id, { headers: this.httpHeaders });
     }
 
     createDocument(file: File): Observable<HttpEvent<{}>> {
@@ -41,7 +32,7 @@ export class DocumentService {
 
         const req = new HttpRequest('POST', 'http://localhost:8080/documents/add', formdata, {
             reportProgress: true,
-            responseType: 'text'
+            responseType: 'text',
         });
 
         return this.http.request(req);

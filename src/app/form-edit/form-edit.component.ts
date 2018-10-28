@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DocumentService } from '../service/document.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'form-edit',
@@ -16,10 +17,12 @@ export class FormEditComponent implements OnInit {
   editForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-    private documentService: DocumentService) { }
+    private documentService: DocumentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const documentId = localStorage.getItem('editDocumentId');
+    // const documentId = this.route.snapshot.paramMap.get("id");
+    //this.route.params.subscribe(params => this.documentId = params['id'])
 
     if (!documentId) {
       alert('Действие невозможно');

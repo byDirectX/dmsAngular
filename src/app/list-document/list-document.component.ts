@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DocumentService } from '../service/document.service';
 import { Document } from '../model/document';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'list-document',

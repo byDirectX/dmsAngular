@@ -8,4 +8,5 @@ export class Document {
     ext: string;
     filePath: string;
     size: number;
+    typeDoc: number;
 }

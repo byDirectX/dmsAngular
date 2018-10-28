@@ -18,7 +18,7 @@
         <td>{{document.ext}}</td>
         <td>{{document.dateUploading}}</td>
         <td><button (click)="removeDocument(document)">Удалить</button></td>
-        <td><button (click)="editDocument(document)">Изменить</button></td>
+        <td><button (click)="editDocument(document)">Изменить {{document.id}}</button></td>
       </tr>
     </tbody>
   </table>

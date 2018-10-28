@@ -1,16 +1,18 @@
 
 <h2>Edit document</h2>
+
+<!-- Test this func -->
 <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
   <label for="fileAutor">Автор файла:</label>
   <input formControlName="fileAutor" placeholder="Автор" name="fileAutor" id="fileAutor" required>
   <br>
 
   <label for="fileVersion">Версия файла:</label>
-  <input formControlName="fileVersion" placeholder="Автор" name="fileVersion" id="fileVersion" required>
+  <input formControlName="fileVersion" placeholder="Версия" name="fileVersion" id="fileVersion" required>
   <br>
 
   <label for="typeDoc">Тип файла:</label>
-  <input formControlName="typeDoc" placeholder="Автор" name="typeDoc" id="typeDoc" required>
+  <input formControlName="typeDoc" placeholder="Тип" name="typeDoc" id="typeDoc" required>
   <br>
 
   <button class="btn btn-success">Принять</button>
