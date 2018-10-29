@@ -26,7 +26,8 @@ export class FormEditComponent implements OnInit {
 
     if (!documentId) {
       alert('Действие невозможно');
-      this.router.navigate(['list-document']);
+      // this.router.navigate(['list-document']);
+      this.router.navigate(['']);
       return;
     }
 
@@ -53,7 +54,8 @@ export class FormEditComponent implements OnInit {
     this.documentService.updateDocument(this.editForm.value)
       .pipe(first())
       .subscribe(data => {
-        this.router.navigate(['list-document']);
+        // this.router.navigate(['list-document']);
+        this.router.navigate(['']);
       },
       error => {
         alert(error);

@@ -22,4 +22,10 @@
       </tr>
     </tbody>
   </table>
+
+  <ul>
+    <li *ngFor="let p of pages; let i = index">
+      <a href="#" (click)="setPage(i, $event)">{{i}}</a>
+    </li>
+  </ul>
 </div>

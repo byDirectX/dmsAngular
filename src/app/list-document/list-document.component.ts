@@ -11,13 +11,35 @@ import { first } from 'rxjs/operators';
 })
 export class ListDocumentComponent implements OnInit {
 
-  documents: Document[];
+  private page: number = 0;
+  private documents: Document[];
+  private pages: number[];
 
   constructor(private router: Router, private documentService: DocumentService) { }
 
   ngOnInit() {
-    this.documentService.getDocuments().subscribe(data => (this.documents = data));
+    // this.documentService.getDocuments(this.page).subscribe(data => (this.documents = data));
+    this.getPages();
   }
+
+  setPage(i, event:any) {
+    // check
+    event.preventDefault();
+    this.page = i;
+    this.getPages();
+  }
+
+  getPages() {
+    this.documentService.getDocuments(this.page).subscribe(
+      data => {
+        this.documents = data['content'];
+        this.pages = new Array(data['totalPages']);
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+      )
+    }
 
   removeDocument(document: Document): void {
     this.documentService.removeDocument(document.id).subscribe(data => {

@@ -4,7 +4,8 @@ import { FormUploadComponent } from './form-upload/form-upload.component';
 import { ListDocumentComponent } from './list-document/list-document.component';
 
 const routes: Routes = [
-    { path: 'list-document', component: ListDocumentComponent },
+    // { path: 'list-document', component: ListDocumentComponent },
+    { path: '', component: ListDocumentComponent},
     { path: 'edit-document', component: FormEditComponent },
     { path: 'upload-document', component: FormUploadComponent }
 ];

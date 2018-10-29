@@ -16,8 +16,8 @@ export class DocumentService {
         console.log('Run service documents');
     }
 
-    getDocuments(): Observable<Document[]> {
-        return this.http.get(this.baseUrl).pipe(
+    getDocuments(page: number): Observable<Document[]> {
+        return this.http.get(this.baseUrl + '?page=' + page).pipe(
             map(data => data as Document[])
         );
     }
