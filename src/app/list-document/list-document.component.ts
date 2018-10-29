@@ -18,7 +18,6 @@ export class ListDocumentComponent implements OnInit {
   constructor(private router: Router, private documentService: DocumentService) { }
 
   ngOnInit() {
-    // this.documentService.getDocuments(this.page).subscribe(data => (this.documents = data));
     this.getPages();
   }
 
