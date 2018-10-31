@@ -1,10 +1,11 @@
 <div class="col">
-  <h2>Документы</h2>
+  <h2>Список документов</h2>
   <table class="table table-striped">
     <thead>
       <tr>
         <th class="hidden">id</th>
         <th>Название документа</th>
+        <th>Смотреть</th>
         <th>Автор</th>
         <th>Расширение</th>
         <th>Дата загрузки</th>
@@ -14,11 +15,13 @@
       <tr *ngFor="let document of documents">
         <td class="hidden">{{document.id}}</td>
         <td>{{document.fileName}}</td>
+        <td><button (click)="saveFile(document)">Скачать</button></td>
         <td>{{document.fileAutor}}</td>
         <td>{{document.ext}}</td>
         <td>{{document.dateUploading}}</td>
+        <td>{{document.filePath}}</td>
         <td><button (click)="removeDocument(document)">Удалить</button></td>
-        <td><button (click)="editDocument(document)">Изменить {{document.id}}</button></td>
+        <td><button (click)="editDocument(document)">Изменить</button></td>
       </tr>
     </tbody>
   </table>

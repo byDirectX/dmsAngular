@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocumentService } from '../service/document.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'form-upload',

@@ -12,16 +12,13 @@ import { TypeDocService} from './service/typedoc.service';
 import { HttpClientModule} from '@angular/common/http';
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { FormEditComponent } from './form-edit/form-edit.component';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { PdfViewerComp } from './pdf-viewer/pdf-viewer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormUploadComponent,
     ListDocumentComponent,
-    FormEditComponent,
-    PdfViewerComp
+    FormEditComponent
   ],
   imports: [
     routing,
@@ -29,8 +26,7 @@ import { PdfViewerComp } from './pdf-viewer/pdf-viewer.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    PdfViewerModule,
+    ReactiveFormsModule
   ],
   providers: [DocumentService, FormClassService, TypeDocService],
   bootstrap: [AppComponent]

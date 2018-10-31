@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentService } from '../service/document.service';
 import { Document } from '../model/document';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'list-document',
@@ -14,15 +13,16 @@ export class ListDocumentComponent implements OnInit {
   private page: number = 0;
   private documents: Document[];
   private pages: number[];
+  private documentId: number;
 
-  constructor(private router: Router, private documentService: DocumentService) { }
+  constructor(private router: Router, private documentService: DocumentService,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.getPages();
   }
 
   setPage(i, event:any) {
-    // check
     event.preventDefault();
     this.page = i;
     this.getPages();
@@ -52,4 +52,7 @@ export class ListDocumentComponent implements OnInit {
     this.router.navigate(['edit-document']);
   }
 
+  saveFile(document: Document) {
+    this.documentService.saveFile(document.id);
+  }
 }

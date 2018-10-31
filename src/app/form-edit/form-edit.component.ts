@@ -21,12 +21,9 @@ export class FormEditComponent implements OnInit {
 
   ngOnInit() {
     const documentId = localStorage.getItem('editDocumentId');
-    // const documentId = this.route.snapshot.paramMap.get("id");
-    //this.route.params.subscribe(params => this.documentId = params['id'])
 
     if (!documentId) {
       alert('Действие невозможно');
-      // this.router.navigate(['list-document']);
       this.router.navigate(['']);
       return;
     }
@@ -54,7 +51,6 @@ export class FormEditComponent implements OnInit {
     this.documentService.updateDocument(this.editForm.value)
       .pipe(first())
       .subscribe(data => {
-        // this.router.navigate(['list-document']);
         this.router.navigate(['']);
       },
       error => {
