@@ -1,12 +1,40 @@
-<div *ngIf="currentFileUpload" class="progress">
-  <div class="progress-bar progress-bar-info progress-bar-striped"
-  role="progressbar" attr.aria.veluenow="{{progress.percentage}}"
-  aria-valuemin="0" aria-valuemax="100"
-  [ngStyle]="{width:progress.percentage+'%'}">{{progress.percentage}}%</div>
+<div class="container">
+
+  <h3>Пожалуйста, перед загрузкой файла внимательно прочтите правила</h3>
+
+  <br>
+
+  <ul>
+    <li><b>Незарегестрированным</b> пользователям доступна загрузка документов размером не более <b>1MB</b>.</li>
+    <li><b>Зарегестрированным</b> пользователям - <b>5MB</b>.</li>
+    <li>Доступна загрузка документов со следующим расширением:
+      <b>doc, docx, ppt, pptx, xls, xlsx, epub, pdf, txt, html, htm</b>.</li>
+    <li><b>Запрещается</b> загрузка файлов с названием содержащим <b>ненормативную лексику</b>.</li>
+    <li>Файлы загруженные <b>незарегестрированными</b> пользователями доступны <b>всем</b> пользователям системы (зарегестрированным и нет).</li>
+    <li>Файлы загруженные <b>незарегестрированными</b> пользователями <b>удаляются</b> из системы <b>через сутки</b>.</li>
+    <li>Имя файла не должно достигать длинны большей 80 символов. Иначе его имя в системе будет автоматически приведено до таких размеров.</li>
+  </ul>
+
+  <br>
+
+  <div class="row">
+
+    <div class="col-sm-3">
+
+    </div>
+    <div class="col-sm-5">
+      <div class="custom-file">
+        <input type="file" id="uploadFile" class="custom-file-input" (change)="selectFile($event)">
+        <label class="custom-file-label" for="uploadFile">{{nameFile}}</label>
+      </div>
+    </div>
+
+    <div class="col-sm-1">
+      <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">{{uploadButton}}</button>
+    </div>
+
+    <div class="col-sm-3">
+
+    </div>
+  </div>
 </div>
-
-<label>
-  <input type="file" (change)="selectFile($event)">
-</label>
-
-<button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">upload</button>

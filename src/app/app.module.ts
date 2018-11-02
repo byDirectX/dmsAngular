@@ -7,18 +7,20 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { FormUploadComponent } from './form-upload/form-upload.component';
 import { DocumentService} from './service/document.service';
-import { FormClassService} from './service/fromclass.service';
 import { TypeDocService} from './service/typedoc.service';
 import { HttpClientModule} from '@angular/common/http';
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { FormEditComponent } from './form-edit/form-edit.component';
+import { SearchPipe } from './pipe/search.pipe';
+import { OrderByPipe } from './pipe/order.by.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormUploadComponent,
     ListDocumentComponent,
-    FormEditComponent
+    FormEditComponent,
+    SearchPipe, OrderByPipe
   ],
   imports: [
     routing,
@@ -28,7 +30,7 @@ import { FormEditComponent } from './form-edit/form-edit.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DocumentService, FormClassService, TypeDocService],
+  providers: [DocumentService, TypeDocService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

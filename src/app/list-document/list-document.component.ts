@@ -10,10 +10,15 @@ import { Document } from '../model/document';
 })
 export class ListDocumentComponent implements OnInit {
 
-  private page: number = 0;
+  private page = 0;
   private documents: Document[];
   private pages: number[];
   private documentId: number;
+  private searchString: any = '';
+  private typeSearch = 1;
+
+  private order = 1;
+  private ascending = true;
 
   constructor(private router: Router, private documentService: DocumentService,
     private activatedRoute: ActivatedRoute) { }
@@ -22,7 +27,7 @@ export class ListDocumentComponent implements OnInit {
     this.getPages();
   }
 
-  setPage(i, event:any) {
+  setPage(i, event: any) {
     event.preventDefault();
     this.page = i;
     this.getPages();
@@ -37,13 +42,13 @@ export class ListDocumentComponent implements OnInit {
       (error) => {
         console.log(error.error.message);
       }
-      )
+      );
     }
 
   removeDocument(document: Document): void {
     this.documentService.removeDocument(document.id).subscribe(data => {
       this.documents = this.documents.filter(c => c !== document);
-    })
+    });
   }
 
   editDocument(document: Document): void {
@@ -52,7 +57,7 @@ export class ListDocumentComponent implements OnInit {
     this.router.navigate(['edit-document']);
   }
 
-  saveFile(document: Document) {
-    this.documentService.saveFile(document.id);
+  goToUploadDocument() {
+    this.router.navigate(['upload-document']);
   }
 }

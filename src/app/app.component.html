@@ -1,1 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">DMS | DOCUMENT MANAGMENT SYSTEM</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="goToMainPage()" style="cursor: pointer">Главная <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="goToListDocument()" style="cursor: pointer">Список</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="goToAbout()" style="cursor: pointer">О системе</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Поиск">
+      <button class="btn btn-secondary" type="submit">Поиск</button>
+    </form>
+  </div>
+</nav>
+
+
+<div class="jumbotron">
+  <h1 class="display-4">Добро пожаловать, Артем!</h1>
+  <p class="lead">Данная система управления позволяет Вам хранить и управлять файлами.</p>
+  <hr class="my-4">
+  <p>Для начала, нажмите кнопку "Загрузить".</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" (click)="goToAbout()" style="color: #fff;" role="button">Узнать о системе больше</a>
+  </p>
+</div>
+
 <router-outlet></router-outlet>
+
+
+<footer class="footer font-small" style="background-color: #f8f9fa">
+  <div class="container">
+    <div class="footer-copyright text-center py-3">2018 | created by <a target="_blank" href="https://github.com/bydirectx">bydirectx</a> | site:
+      <a href="https://bondarev.ml"> bondarev.ml</a>
+    </div>
+  </div>
+</footer>

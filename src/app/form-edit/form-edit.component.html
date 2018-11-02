@@ -1,19 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Редактирование документа</h2>
 
-<h2>Редактирование документа</h2>
+      <!-- Test this func -->
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="fileAuthor">Автор файла</label>
+          <input class="form-control" formControlName="fileAuthor" placeholder="Автор" name="fileAuthor" id="fileAuthor" required>
+          <small id="fileAuthorHelp" class="form-text text-muted">Введите автора файла. Доступны символы кирилицы и латиницы, а так же цифры и пробел.</small>
+        </div>
 
-<!-- Test this func -->
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-  <label for="fileAutor">Автор файла:</label>
-  <input formControlName="fileAutor" placeholder="Автор" name="fileAutor" id="fileAutor" required>
-  <br>
+        <div class="form-group">
+          <label for="fileVersion">Версия файла</label>
+          <input class="form-control" formControlName="fileVersion" placeholder="Версия" name="fileVersion" id="fileVersion" required>
+        </div>
 
-  <label for="fileVersion">Версия файла:</label>
-  <input formControlName="fileVersion" placeholder="Версия" name="fileVersion" id="fileVersion" required>
-  <br>
+        <div class="form-group">
+          <label for="typeDoc">Тип файла</label>
+          <input class="form-control" formControlName="typeDoc" placeholder="Тип" name="typeDoc" id="typeDoc" required>
+        </div>
 
-  <label for="typeDoc">Тип файла:</label>
-  <input formControlName="typeDoc" placeholder="Тип" name="typeDoc" id="typeDoc" required>
-  <br>
+        <button class="btn btn-success">Принять</button>
+      </form>
+    </div>
 
-  <button class="btn btn-success">Принять</button>
-</form>
+    <div class="col">
+      <h2>Подробнее</h2>
+      <div>
+        <p>Файл: {{doc.fileName+doc.ext}}<br>
+          Автор файла: {{doc.fileAuthor}}<br>
+          Версия файла: {{doc.fileVersion}}<br>
+          Дата загрузки: {{doc.dateUploading}}<br>
+          Размер файла: {{doc.size}} MB</p>
+      </div>
+
+      <button class="btn btn-primary" (click)="saveFile(doc)">Скачать файл</button>
+    </div>
+  </div>
+</div>

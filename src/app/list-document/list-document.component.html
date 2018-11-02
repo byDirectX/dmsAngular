@@ -1,34 +1,77 @@
-<div class="col">
-  <h2>Список документов</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="hidden">id</th>
-        <th>Название документа</th>
-        <th>Смотреть</th>
-        <th>Автор</th>
-        <th>Расширение</th>
-        <th>Дата загрузки</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let document of documents">
-        <td class="hidden">{{document.id}}</td>
-        <td>{{document.fileName}}</td>
-        <td><button (click)="saveFile(document)">Скачать</button></td>
-        <td>{{document.fileAutor}}</td>
-        <td>{{document.ext}}</td>
-        <td>{{document.dateUploading}}</td>
-        <td>{{document.filePath}}</td>
-        <td><button (click)="removeDocument(document)">Удалить</button></td>
-        <td><button (click)="editDocument(document)">Изменить</button></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container">
+    <div class="form-row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <button class="btn btn-outline-success" (click)="goToUploadDocument()">Загрузить</button>
+        </div>
+      </div>
 
-  <ul>
-    <li *ngFor="let p of pages; let i = index">
-      <a href="#" (click)="setPage(i, $event)">{{i}}</a>
-    </li>
-  </ul>
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Поиск</span>
+          </div>
+          <input class="form-control" type="text" [(ngModel)]="searchString" placeholder="Поиск по" />
+
+          <select class="form-control" [(ngModel)]="typeSearch">
+            <option [ngValue]="1">Названию</option>
+            <option [ngValue]="2">Автору</option>
+            <option [ngValue]="3">Типу</option>
+            <option [ngValue]="4">Расширению</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">Сортировка</span>
+          </div>
+
+          <select class="form-control" [(ngModel)]="order">
+            <option [ngValue]="1">По названию</option>
+            <option [ngValue]="2">По дате загрузки</option>
+          </select>
+
+          <select class="form-control" [(ngModel)]="ascending">
+            <option [ngValue]="true">Возрастанию</option>
+            <option [ngValue]="false">Убыванию</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <h2 style="margin-left: 1%">Список документов</h2>
+
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th>Документ</th>
+          <th>Автор</th>
+          <th>Расширение</th>
+          <th class="text-center">Дата загрузки</th>
+          <th class="text-center">#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let document of documents | search:searchString:typeSearch | orderBy:order:ascending">
+          <td><a href="/edit-document" (click)="editDocument(document)">{{document.fileName}}</a></td>
+          <td>{{document.fileAuthor}}</td>
+          <td class="text-center">{{document.ext}}</td>
+          <td class="text-center">{{document.dateUploading}}</td>
+          <td class="text-center"><button class="btn btn-danger btn-sm" (click)="removeDocument(document)">Удалить</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav aria-label="Страницы документов">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" *ngFor="let p of pages; let i = index">
+          <a class="page-link" href="#" (click)="setPage(i, $event)">{{i}}</a>
+        </li>
+      </ul>
+    </nav>
+
 </div>

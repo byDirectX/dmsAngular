@@ -9,9 +9,10 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 })
 export class FormUploadComponent implements OnInit {
 
-  selectedFiles: FileList;
-  currentFileUpload: File;
-  progress: { percentage: number } = { percentage: 0 }
+  private selectedFiles: FileList;
+  private currentFileUpload: File;
+  private nameFile = 'Выберите файл';
+  private uploadButton = 'Загрузить';
 
   constructor(private documentService: DocumentService) { }
 
@@ -20,19 +21,18 @@ export class FormUploadComponent implements OnInit {
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
+    this.nameFile = this.selectedFiles.item(0).name;
+    this.uploadButton = 'Загрузить';
   }
 
   upload() {
-    this.progress.percentage = 0;
-
     this.currentFileUpload = this.selectedFiles.item(0);
     this.documentService.createDocument(this.currentFileUpload).subscribe(event => {
-      if (event.type === HttpEventType.UploadProgress) {
-        this.progress.percentage = Math.round(100 * event.loaded / event.total);
-      } else if (event instanceof HttpResponse) {
+      if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
       }
-    })
+      this.uploadButton = 'Успех!';
+    });
 
     this.selectedFiles = undefined;
   }

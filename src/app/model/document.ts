@@ -1,7 +1,7 @@
 export class Document {
     id: number;
     fileName: string;
-    fileAutor: string;
+    fileAuthor: string;
     dateUploading: Date;
     dateLastEditing: Date;
     fileVersion: number;
