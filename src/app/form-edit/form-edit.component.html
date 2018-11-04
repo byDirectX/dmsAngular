@@ -3,7 +3,6 @@
     <div class="col">
       <h2>Редактирование документа</h2>
 
-      <!-- Test this func -->
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="fileAuthor">Автор файла</label>
@@ -16,9 +15,21 @@
           <input class="form-control" formControlName="fileVersion" placeholder="Версия" name="fileVersion" id="fileVersion" required>
         </div>
 
+        <hr>
+
+        <div class="form">
+          <form>
+            <div class="form-group">
+              <input class="form-control" type="text" [(ngModel)]="typeDoc.name" placeholder="Введите тип и нажмите на Enter" name="name" id="typeDocName" (keyup.enter)="createTypeDoc()" />
+            </div>
+          </form>
+        </div>
+
         <div class="form-group">
-          <label for="typeDoc">Тип файла</label>
-          <input class="form-control" formControlName="typeDoc" placeholder="Тип" name="typeDoc" id="typeDoc" required>
+          <label for="typeDoc">Выберите тип</label>
+          <select class="form-control" formControlName="typeDoc" id="typeDoc">
+            <option *ngFor="let type of typeDocArray" name="typeDoc" value="{{type.id}}">{{type.name}}</option>
+          </select>
         </div>
 
         <button class="btn btn-success">Принять</button>
@@ -26,6 +37,15 @@
     </div>
 
     <div class="col">
+      <h2>Поделиться</h2>
+      <div>
+        <p>Ваш файл доступен для пользователей системы в общем списке файлов.<br>
+        Сохраните данную ссылку для скачивания и редактирования файла.</p>
+
+        <p><a href="http://localhost:4200/edit-document/{{doc.id}}">
+          http://localhost:4200/edit-document/{{doc.id}}</a></p>
+      </div>
+
       <h2>Подробнее</h2>
       <div>
         <p>Файл: {{doc.fileName+doc.ext}}<br>
@@ -35,7 +55,9 @@
           Размер файла: {{doc.size}} MB</p>
       </div>
 
-      <button class="btn btn-primary" (click)="saveFile(doc)">Скачать файл</button>
+      <button class="download btn btn-primary" (click)="saveFile(doc)">Скачать файл</button>
     </div>
   </div>
 </div>
+
+<br>

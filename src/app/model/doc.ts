@@ -1,4 +1,4 @@
-export class Document {
+export class Doc {
     id: number;
     fileName: string;
     fileAuthor: string;
@@ -9,4 +9,5 @@ export class Document {
     filePath: string;
     size: number;
     typeDoc: number;
+    hide: boolean;
 }

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Document } from '../model/document';
+import { Doc } from '../model/doc';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DocumentService } from '../service/document.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import {TypeDocService} from '../service/typedoc.service';
+import {TypeDoc} from '../model/typedoc';
 
 @Component({
   selector: 'form-edit',
@@ -13,21 +15,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FormEditComponent implements OnInit {
 
-  private doc: Document;
+  private doc: Doc;
   private editForm: FormGroup;
+  private hide: boolean;
+  private typeDocArray: TypeDoc[];
+  private typeDoc: TypeDoc = new TypeDoc();
 
   constructor(private formBuilder: FormBuilder, private router: Router,
-    private documentService: DocumentService, private route: ActivatedRoute) { }
+    private documentService: DocumentService, private route: ActivatedRoute, private typeDocService: TypeDocService) { }
 
   ngOnInit() {
-    const documentId = localStorage.getItem('editDocumentId');
+    const documentId = this.route.snapshot.paramMap.get('docId');
+
+    this.typeDocService.getTypeDocs().subscribe(data => {
+      this.typeDocArray = data;
+    });
 
     this.documentService.getDocument(+documentId)
       .subscribe(data => this.doc = data);
-    console.log(this.doc + ' ' + +documentId);
 
     if (!documentId) {
-      alert('Действие невозможно');
+      alert('Возникла критическая ошибка!');
       this.router.navigate(['']);
       return;
     }
@@ -42,7 +50,7 @@ export class FormEditComponent implements OnInit {
       ext: ['', Validators.required],
       filePath: ['', Validators.required],
       size: ['', Validators.required],
-      typeDoc: ['', Validators.required]
+      typeDoc: ['', Validators.required],
     });
 
     this.documentService.getDocument(+documentId)
@@ -51,21 +59,36 @@ export class FormEditComponent implements OnInit {
       });
   }
 
+  createTypeDoc() {
+    console.log('create typedoc: ' + this.typeDoc);
+    this.typeDocService.createTypeDoc(this.typeDoc).subscribe(data => {
+      alert('create typedoc succesfull');
+    });
+    this.typeDocArray.push(this.typeDoc);
+  }
+
   onSubmit() {
     this.documentService.updateDocument(this.editForm.value)
       .pipe(first())
       .subscribe(data => {
-        // this.router.navigate(['redirect-edit-document']);
-      },
-      error => {
-        alert(error);
-      });
+        },
+        error => {
+          alert('Упс, кажется у нас возникла ошибка!');
+        });
     window.location.reload();
   }
 
-  saveFile(document: Document) {
-    this.documentService.saveFile(document.id, document.ext);
+  saveFile(document: Doc) {
+    this.documentService.saveFile(document);
     console.log(document.id + ' ' + document.ext);
   }
 
+}
+
+function convertToBoolean(input: string): boolean | undefined {
+  try {
+    return JSON.parse(input);
+  } catch (e) {
+    return undefined;
+  }
 }

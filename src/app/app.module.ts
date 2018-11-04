@@ -13,6 +13,7 @@ import { ListDocumentComponent } from './list-document/list-document.component';
 import { FormEditComponent } from './form-edit/form-edit.component';
 import { SearchPipe } from './pipe/search.pipe';
 import { OrderByPipe } from './pipe/order.by.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OrderByPipe } from './pipe/order.by.pipe';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   providers: [DocumentService, TypeDocService],
   bootstrap: [AppComponent]

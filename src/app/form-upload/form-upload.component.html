@@ -5,36 +5,50 @@
   <br>
 
   <ul>
-    <li><b>Незарегестрированным</b> пользователям доступна загрузка документов размером не более <b>1MB</b>.</li>
-    <li><b>Зарегестрированным</b> пользователям - <b>5MB</b>.</li>
+    <li>Доступна загрузка документов размером не более <b>1MB</b>.</li>
+    <li>При загрузке укажите имя автора и тип документа. А так же установите флаг доступности.</li>
+    <li>Флаг доступности определяет, является ли ваш документ доступным в общем списке.</li>
+    <li>Тип документа можно добавить на этой же странице.</li>
     <li>Доступна загрузка документов со следующим расширением:
-      <b>doc, docx, ppt, pptx, xls, xlsx, epub, pdf, txt, html, htm</b>.</li>
-    <li><b>Запрещается</b> загрузка файлов с названием содержащим <b>ненормативную лексику</b>.</li>
-    <li>Файлы загруженные <b>незарегестрированными</b> пользователями доступны <b>всем</b> пользователям системы (зарегестрированным и нет).</li>
-    <li>Файлы загруженные <b>незарегестрированными</b> пользователями <b>удаляются</b> из системы <b>через сутки</b>.</li>
+      <b>doc, docx, ppt, pptx, xls, xlsx, epub, pdf, txt, odt</b>.</li>
     <li>Имя файла не должно достигать длинны большей 80 символов. Иначе его имя в системе будет автоматически приведено до таких размеров.</li>
   </ul>
 
   <br>
 
-  <div class="row">
+  <div class="form" style="margin: 0 20%">
+    <form>
+      <div class="form-group">
+        <input class="form-control" type="text" [(ngModel)]="typeDoc.name" placeholder="Введите тип и нажмите на Enter" name="name" id="typeDocName" (keyup.enter)="createTypeDoc()" />
+      </div>
+    </form>
 
-    <div class="col-sm-3">
+    <hr>
+  </div>
 
+
+  <div class="form" style="margin: 0 20%">
+    <div class="form-group">
+      <label for="author">Укажите автора файла</label>
+      <input class="form-control" type="text" placeholder="Автор файла" id="author" [(ngModel)]="author" />
     </div>
-    <div class="col-sm-5">
+
+    <div class="form-group">
+      <label for="typeDocId">Выберите тип</label>
+      <select class="form-control" [(ngModel)]="typeDocChange" id="typeDocId">
+        <option *ngFor="let type of typeDocArray" [value]="type.id">{{type.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
       <div class="custom-file">
-        <input type="file" id="uploadFile" class="custom-file-input" (change)="selectFile($event)">
+        <input type="file" id="uploadFile" class="custom-file-input" (change)="selectFile($event)" />
         <label class="custom-file-label" for="uploadFile">{{nameFile}}</label>
       </div>
     </div>
 
-    <div class="col-sm-1">
-      <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">{{uploadButton}}</button>
-    </div>
-
-    <div class="col-sm-3">
-
-    </div>
+    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Загрузить</button>
   </div>
 </div>
+
+<br>

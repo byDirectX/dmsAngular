@@ -16,22 +16,13 @@
         <a class="nav-link" (click)="goToAbout()" style="cursor: pointer">О системе</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Поиск">
-      <button class="btn btn-secondary" type="submit">Поиск</button>
-    </form>
   </div>
 </nav>
 
 
 <div class="jumbotron">
-  <h1 class="display-4">Добро пожаловать, Артем!</h1>
+  <h1 class="display-4">Добро пожаловать!</h1>
   <p class="lead">Данная система управления позволяет Вам хранить и управлять файлами.</p>
-  <hr class="my-4">
-  <p>Для начала, нажмите кнопку "Загрузить".</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" (click)="goToAbout()" style="color: #fff;" role="button">Узнать о системе больше</a>
-  </p>
 </div>
 
 <router-outlet></router-outlet>

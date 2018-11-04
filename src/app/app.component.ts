@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  private title = 'Document management system';
+  private title = 'Doc management system';
   private description = 'System for managment document';
 
   constructor(private router: Router) {

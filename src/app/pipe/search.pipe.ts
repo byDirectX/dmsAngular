@@ -1,44 +1,47 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {toNumbers} from '@angular/compiler-cli/src/diagnostics/typescript_version';
 
 @Pipe({
     name: 'search'
 })
 export class SearchPipe implements PipeTransform {
-    transform(documents, searchString: any, typeSearch: number) {
+  transform(documents, searchString: string, typeSearch: number) {
 
-      if (!Array.isArray(documents)) {
-        return;
+    if (!Array.isArray(documents)) {
+      return;
+    }
+
+    switch (typeSearch) {
+      case 1: {
+        console.log('filter by name');
+        return documents.filter(document => {
+          return document.fileName.includes(searchString);
+        });
       }
 
-        switch (typeSearch) {
-            case 1: {
-              return documents.filter(document => {
-                return document.fileName.includes(searchString);
-              });
-            }
+      case 2: {
+        console.log('filter by author');
+        return documents.filter(document => {
+          if (document.fileAuthor === null) {
 
-            case 2: {
-              return documents.filter(document => {
-                if (document.fileAuthor === null) {
+          } else {
+            return document.fileAuthor.includes(searchString);
+          }
+        });
+      }
 
-                } else {
-                  return document.fileAuthor.indexOf(searchString);
-                }
-              });
-            }
+      case 3: {
+        console.log('filter by typedoc');
+        return documents.filter(document => {
+          return document.typeDoc === parseInt(searchString);
+        });
+      }
 
-            case 3: {
-              return documents.filter(document => {
-                return document.typeDoc === parseInt(searchString);
-              });
-            }
-
-            case 4: {
-              return documents.filter(document => {
-                return document.ext.indexOf(searchString);
-              });
-            }
-        }
+      case 4: {
+        console.log('filter by ext');
+        return documents.filter(document => {
+          return document.ext.includes(searchString);
+        });
+      }
     }
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentService } from '../service/document.service';
-import { Document } from '../model/document';
+import { Doc } from '../model/doc';
 
 @Component({
   selector: 'list-document',
@@ -11,14 +11,16 @@ import { Document } from '../model/document';
 export class ListDocumentComponent implements OnInit {
 
   private page = 0;
-  private documents: Document[];
-  private pages: number[];
+  private documents: Doc[];
   private documentId: number;
+
   private searchString: any = '';
   private typeSearch = 1;
 
   private order = 1;
   private ascending = true;
+
+  private p = 1;
 
   constructor(private router: Router, private documentService: DocumentService,
     private activatedRoute: ActivatedRoute) { }
@@ -27,34 +29,41 @@ export class ListDocumentComponent implements OnInit {
     this.getPages();
   }
 
-  setPage(i, event: any) {
-    event.preventDefault();
-    this.page = i;
-    this.getPages();
-  }
+  // setPage(i, event: any) {
+  //   event.preventDefault();
+  //   this.page = i;
+  //   this.getPages();
+  // }
 
   getPages() {
-    this.documentService.getDocuments(this.page).subscribe(
+    console.log('calling getPages');
+    // this.documentService.getDocuments(this.page).subscribe(
+    //   data => {
+    //     this.documents = data['content'];
+    //     this.pages = new Array(data['totalPages']);
+    //   },
+    //   (error) => {
+    //     console.log(error.error.message);
+    //   }
+    //   );
+    this.documentService.getDocuments().subscribe(
       data => {
-        this.documents = data['content'];
-        this.pages = new Array(data['totalPages']);
+        this.documents = data;
       },
       (error) => {
         console.log(error.error.message);
       }
-      );
+    );
     }
 
-  removeDocument(document: Document): void {
+  removeDocument(document: Doc): void {
     this.documentService.removeDocument(document.id).subscribe(data => {
       this.documents = this.documents.filter(c => c !== document);
     });
   }
 
-  editDocument(document: Document): void {
-    localStorage.removeItem('editDocumentId');
-    localStorage.setItem('editDocumentId', document.id.toString());
-    this.router.navigate(['edit-document']);
+  editDocument(document: Doc): void {
+    this.router.navigate(['edit-document/' + document.id]);
   }
 
   goToUploadDocument() {
