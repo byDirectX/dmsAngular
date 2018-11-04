@@ -73,7 +73,7 @@ export class FormEditComponent implements OnInit {
       .subscribe(data => {
         },
         error => {
-          alert('Упс, кажется у нас возникла ошибка!');
+          alert('Кажется у нас возникла ошибка!');
         });
     window.location.reload();
   }
