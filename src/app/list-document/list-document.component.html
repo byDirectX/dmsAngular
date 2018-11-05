@@ -11,7 +11,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="">Поиск</span>
           </div>
-          <input class="form-control" type="text" [(ngModel)]="searchString" placeholder="Поиск по" />
+          <input class="form-control" type="text" #searchString placeholder="Поиск по" />
 
           <select class="form-control" [(ngModel)]="typeSearch">
             <option [ngValue]="1">Названию</option>
@@ -56,7 +56,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let document of documents | search:searchString:typeSearch | orderBy:order:ascending | paginate: {
+        <tr *ngFor="let document of documents | paginate: {
         itemsPerPage: 5, currentPage: p}">
           <td><a (click)="editDocument(document)" style="cursor: pointer; color: deepskyblue">{{document.fileName}}</a></td>
           <td>{{document.fileAuthor}}</td>

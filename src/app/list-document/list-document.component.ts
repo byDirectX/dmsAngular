@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentService } from '../service/document.service';
 import { Doc } from '../model/doc';
+import { fromEvent } from 'rxjs';
+import { filter, debounceTime, distinctUntilChanged, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'list-document',
@@ -10,33 +12,54 @@ import { Doc } from '../model/doc';
 })
 export class ListDocumentComponent implements OnInit {
 
-  private page = 0;
-  private documents: Doc[];
+  public documents: Doc[];
   private documentId: number;
 
-  private searchString: any = '';
-  private typeSearch = 1;
+  @ViewChild('searchString')
+  public searchString: ElementRef<HTMLInputElement> = null;
 
-  private order = 1;
-  private ascending = true;
+  public typeSearch = 1;
+
+  public order = 1;
+  public ascending = true;
 
   private p = 1;
 
   constructor(private router: Router, private documentService: DocumentService,
-    private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit() {
-    this.getPages();
+    private activatedRoute: ActivatedRoute) {
+    this.documentService.getDocuments('', 1).subscribe(
+      request => {
+        this.documents = request;
+      }
+    );
   }
 
-  // setPage(i, event: any) {
-  //   event.preventDefault();
-  //   this.page = i;
-  //   this.getPages();
+  ngOnInit() {
+    fromEvent(this.searchString.nativeElement, 'input').pipe(
+      filter((value) => !!value),
+      debounceTime(250),
+      distinctUntilChanged(),
+      mergeMap((value) => this.documentService
+        .getDocuments(this.searchString.nativeElement.value, this.typeSearch)))
+      .subscribe((response) => {
+        this.documents = response;
+        console.log(response);
+        console.log(this.documents);
+    });
+  }
+
+  // selectionChange() {
+  //   console.log(this.typeSearch + ' | ' + this.searchString.nativeElement.value);
+  //   this.documentService.getDocuments(this.searchString.nativeElement.value, this.typeSearch)
+  //     .subscribe((response) => {
+  //       this.documents = response;
+  //       console.log(response);
+  //     }
+  //   );
   // }
 
-  getPages() {
-    console.log('calling getPages');
+  // getPages() {
+  //   console.log('calling getPages');
     // this.documentService.getDocuments(this.page).subscribe(
     //   data => {
     //     this.documents = data['content'];
@@ -46,15 +69,18 @@ export class ListDocumentComponent implements OnInit {
     //     console.log(error.error.message);
     //   }
     //   );
-    this.documentService.getDocuments().subscribe(
-      data => {
-        this.documents = data;
-      },
-      (error) => {
-        console.log(error.error.message);
-      }
-    );
-    }
+
+
+    // work //
+    // this.documentService.getDocuments().subscribe(
+    //   data => {
+    //     this.documents = data;
+    //   },
+    //   (error) => {
+    //     console.log(error.error.message);
+    //   }
+    // );
+    // }
 
   removeDocument(document: Doc): void {
     this.documentService.removeDocument(document.id).subscribe(data => {

@@ -16,10 +16,10 @@ export class DocumentService {
     console.log('Run service documents');
   }
 
-  getDocuments(): Observable<Doc[]> {
-      return this.http.get(this.baseUrl).pipe(
-        map(data => data as Doc[])
-      );
+  getDocuments(searchString: string, typeSearch: number): Observable<Doc[]> {
+    return this.http.get(this.baseUrl + '?typeSearch=' + typeSearch + '&searchString=' + searchString).pipe(
+      map(data => data as Doc[])
+    );
   }
 
   getDocument(id: number) {
