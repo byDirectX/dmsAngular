@@ -66,40 +66,6 @@ export class ListDocumentComponent implements OnInit {
       });
   }
 
-  // selectionChange() {
-  //   console.log(this.typeSearch + ' | ' + this.searchString.nativeElement.value);
-  //   this.documentService.getDocuments(this.searchString.nativeElement.value, this.typeSearch)
-  //     .subscribe((response) => {
-  //       this.documents = response;
-  //       console.log(response);
-  //     }
-  //   );
-  // }
-
-  // getPages() {
-  //   console.log('calling getPages');
-    // this.documentService.getDocuments(this.page).subscribe(
-    //   data => {
-    //     this.documents = data['content'];
-    //     this.pages = new Array(data['totalPages']);
-    //   },
-    //   (error) => {
-    //     console.log(error.error.message);
-    //   }
-    //   );
-
-
-    // work //
-    // this.documentService.getDocuments().subscribe(
-    //   data => {
-    //     this.documents = data;
-    //   },
-    //   (error) => {
-    //     console.log(error.error.message);
-    //   }
-    // );
-    // }
-
   removeDocument(document: Doc): void {
     this.documentService.removeDocument(document.id).subscribe(data => {
       this.documents = this.documents.filter(c => c !== document);

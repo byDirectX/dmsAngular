@@ -46,12 +46,10 @@ export class DocumentService {
           }
           case '.html': {
             blob = new Blob([xhr.response], { type: 'text/html' });
-            console.log('html download')
             break;
           }
           case '.htm': {
             blob = new Blob([xhr.response], { type: 'text/html' });
-            console.log('html download')
             break;
           }
           case '.epub': {
