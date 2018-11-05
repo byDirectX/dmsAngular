@@ -15,11 +15,11 @@ import {TypeDoc} from '../model/typedoc';
 })
 export class FormEditComponent implements OnInit {
 
-  private doc: Doc;
-  private editForm: FormGroup;
-  private hide: boolean;
-  private typeDocArray: TypeDoc[];
-  private typeDoc: TypeDoc = new TypeDoc();
+  public doc: Doc;
+  public editForm: FormGroup;
+  public hide: boolean;
+  public typeDocArray: TypeDoc[];
+  public typeDoc: TypeDoc = new TypeDoc();
 
   constructor(private formBuilder: FormBuilder, private router: Router,
     private documentService: DocumentService, private route: ActivatedRoute, private typeDocService: TypeDocService) { }

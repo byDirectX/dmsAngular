@@ -16,8 +16,9 @@ export class DocumentService {
     console.log('Run service documents');
   }
 
-  getDocuments(searchString: string, typeSearch: number): Observable<Doc[]> {
-    return this.http.get(this.baseUrl + '?typeSearch=' + typeSearch + '&searchString=' + searchString).pipe(
+  getDocuments(searchString: string, typeSearch: number, order: number, ascending: boolean): Observable<Doc[]> {
+    return this.http.get(this.baseUrl + '?typeSearch=' + typeSearch + '&searchString=' + searchString +
+    '&order=' + order + '&ascending=' + ascending).pipe(
       map(data => data as Doc[])
     );
   }

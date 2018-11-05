@@ -11,8 +11,6 @@ import { TypeDocService} from './service/typedoc.service';
 import { HttpClientModule} from '@angular/common/http';
 import { ListDocumentComponent } from './list-document/list-document.component';
 import { FormEditComponent } from './form-edit/form-edit.component';
-import { SearchPipe } from './pipe/search.pipe';
-import { OrderByPipe } from './pipe/order.by.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
@@ -20,8 +18,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AppComponent,
     FormUploadComponent,
     ListDocumentComponent,
-    FormEditComponent,
-    SearchPipe, OrderByPipe
+    FormEditComponent
   ],
   imports: [
     routing,

@@ -13,11 +13,11 @@
           </div>
           <input class="form-control" type="text" #searchString placeholder="Поиск по" />
 
-          <select class="form-control" [(ngModel)]="typeSearch">
-            <option [ngValue]="1">Названию</option>
-            <option [ngValue]="2">Автору</option>
-            <option [ngValue]="3">Типу</option>
-            <option [ngValue]="4">Расширению</option>
+          <select class="form-control" [(ngModel)]="typeSearch" (change)="selectionChange()">
+            <option [value]="types.Name">Названию</option>
+            <option [value]="types.Author">Автору</option>
+            <option [value]="types.TypeDoc">Типу</option>
+            <option [value]="types.Extension">Расширению</option>
           </select>
         </div>
       </div>
@@ -28,14 +28,14 @@
             <span class="input-group-text" id="">Сортировка</span>
           </div>
 
-          <select class="form-control" [(ngModel)]="order">
-            <option [ngValue]="1">По названию</option>
-            <option [ngValue]="2">По дате загрузки</option>
+          <select class="form-control" [(ngModel)]="order" (change)="selectionChange()">
+            <option [value]="1">По названию</option>
+            <option [value]="2">По дате загрузки</option>
           </select>
 
-          <select class="form-control" [(ngModel)]="ascending">
-            <option [ngValue]="true">Возрастанию</option>
-            <option [ngValue]="false">Убыванию</option>
+          <select class="form-control" [(ngModel)]="ascending" (change)="selectionChange()">
+            <option [value]="true">Возрастанию</option>
+            <option [value]="false">Убыванию</option>
           </select>
         </div>
       </div>

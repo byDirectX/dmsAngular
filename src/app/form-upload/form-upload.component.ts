@@ -11,13 +11,13 @@ import { TypeDocService } from '../service/typedoc.service';
 })
 export class FormUploadComponent implements OnInit {
 
-  private selectedFiles: FileList;
-  private currentFileUpload: File;
-  private nameFile = 'Выберите файл';
-  private author = '';
-  private typeDocArray: TypeDoc[];
-  private typeDocChange: number;
-  private typeDoc: TypeDoc = new TypeDoc();
+  public selectedFiles: FileList;
+  public currentFileUpload: File;
+  public nameFile = 'Выберите файл';
+  public author = '';
+  public typeDocArray: TypeDoc[];
+  public typeDocChange: number;
+  public typeDoc: TypeDoc = new TypeDoc();
 
   constructor(private documentService: DocumentService, private typeDocService: TypeDocService) { }
 
