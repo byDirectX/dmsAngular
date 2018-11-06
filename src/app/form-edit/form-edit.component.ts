@@ -61,11 +61,12 @@ export class FormEditComponent implements OnInit {
   }
 
   public createTypeDoc() {
-    this.typeDocService.createTypeDoc(this.typeDoc).subscribe(data => {
-    });
+    this.typeDocService.createTypeDoc(this.typeDoc).subscribe(data => { });
     this.typeDocService.getTypeDocByName(this.typeDoc.name).subscribe(data => {
       this.typeDocArray.push(data);
     });
+
+    console.log('after pushing: ' + this.typeDocArray);
   }
 
   public onSubmit() {

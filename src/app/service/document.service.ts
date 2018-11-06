@@ -9,17 +9,14 @@ import {map, tap} from 'rxjs/operators';
 })
 export class DocumentService {
 
-  private baseUrl = 'https://31.148.99.234:8443/dms/documents';
+  private baseUrl = 'http://localhost:8080/documents';
 
   public constructor(private http: HttpClient) {
     console.log('Run service documents');
   }
 
   public getDocuments(searchString: string, typeSearch: number, order: number, ascending: boolean): Observable<Doc[]> {
-    return this.http.get(`${this.baseUrl}?typeSearch=${typeSearch}&searchString=${searchString}&order=${order}&ascending=${ascending}`)
-      .pipe(
-        map(data => data as Doc[])
-      );
+    return this.http.get<Doc[]>(`${this.baseUrl}?typeSearch=${typeSearch}&searchString=${searchString}&order=${order}&ascending=${ascending}`);
   }
 
   public getDocument(id: number) {
