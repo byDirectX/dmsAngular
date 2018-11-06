@@ -10,8 +10,11 @@
     <li>Флаг доступности определяет, является ли ваш документ доступным в общем списке.</li>
     <li>Тип документа можно добавить на этой же странице.</li>
     <li>Доступна загрузка документов со следующим расширением:
-      <b>doc, docx, ppt, pptx, xls, xlsx, epub, pdf, txt, odt</b>.</li>
-    <li>Имя файла не должно достигать длинны большей 80 символов. Иначе его имя в системе будет автоматически приведено до таких размеров.</li>
+      <b>doc, docx, ppt, pptx, xls, xlsx, epub, pdf, txt, odt</b>.
+    </li>
+    <li>Имя файла не должно достигать длинны большей 80 символов. Иначе его имя в системе будет автоматически приведено
+      до таких размеров.
+    </li>
   </ul>
 
   <br>
@@ -19,7 +22,8 @@
   <div class="form" style="margin: 0 20%">
     <form>
       <div class="form-group">
-        <input class="form-control" type="text" [(ngModel)]="typeDoc.name" placeholder="Введите тип и нажмите на Enter" name="name" id="typeDocName" (keyup.enter)="createTypeDoc()" />
+        <input class="form-control" type="text" [(ngModel)]="typeDoc.name" placeholder="Введите тип и нажмите на Enter"
+               name="name" id="typeDocName" (keyup.enter)="createTypeDoc()"/>
       </div>
     </form>
 
@@ -30,24 +34,37 @@
   <div class="form" style="margin: 0 20%">
     <div class="form-group">
       <label for="author">Укажите автора файла</label>
-      <input class="form-control" type="text" placeholder="Автор файла" id="author" [(ngModel)]="author" />
+      <input class="form-control" type="text" placeholder="Автор файла" id="author" [formControl]="author" required/>
+      <div class="alert alert-danger"
+           *ngIf="author.invalid && author.touched">
+        Имя указано неверно
+      </div>
     </div>
 
     <div class="form-group">
       <label for="typeDocId">Выберите тип</label>
-      <select class="form-control" [(ngModel)]="typeDocChange" id="typeDocId">
+      <select class="form-control" [formControl]="typeDocChange" id="typeDocId">
         <option *ngFor="let type of typeDocArray" [value]="type.id">{{type.name}}</option>
       </select>
+      <div class="alert alert-danger" *ngIf="typeDocChange.invalid && typeDocChange.touched">
+        Выберите тип документа
+      </div>
     </div>
 
     <div class="form-group">
       <div class="custom-file">
-        <input type="file" id="uploadFile" class="custom-file-input" (change)="selectFile($event)" />
+        <input type="file" id="uploadFile" class="custom-file-input" (change)="selectFile($event)"/>
         <label class="custom-file-label" for="uploadFile">{{nameFile}}</label>
+      </div>
+      <div class="alert alert-danger"
+           *ngIf="sizeFile > 1">
+        Превышен допустимый размер файла
       </div>
     </div>
 
-    <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">Загрузить</button>
+    <button class="btn btn-success" [disabled]="!selectedFiles || (author.invalid && author.touched)
+    || (typeDocChange.invalid && typeDocChange.touched) || sizeFile > 1" (click)="upload()">Загрузить
+    </button>
   </div>
 </div>
 

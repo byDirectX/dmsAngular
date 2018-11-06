@@ -1,71 +1,73 @@
 <div class="container">
-    <div class="form-row">
-      <div class="col-md-3">
-        <div class="form-group">
-          <button class="btn btn-outline-success" (click)="goToUploadDocument()">Загрузить</button>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Поиск</span>
-          </div>
-          <input class="form-control" type="text" #searchString placeholder="Поиск по" />
-
-          <select class="form-control" [(ngModel)]="typeSearch" (change)="selectionChange()">
-            <option [value]="types.Name">Названию</option>
-            <option [value]="types.Author">Автору</option>
-            <option [value]="types.TypeDoc">Типу</option>
-            <option [value]="types.Extension">Расширению</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="">Сортировка</span>
-          </div>
-
-          <select class="form-control" [(ngModel)]="order" (change)="selectionChange()">
-            <option [value]="1">По названию</option>
-            <option [value]="2">По дате загрузки</option>
-          </select>
-
-          <select class="form-control" [(ngModel)]="ascending" (change)="selectionChange()">
-            <option [value]="true">Возрастанию</option>
-            <option [value]="false">Убыванию</option>
-          </select>
-        </div>
+  <div class="form-row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <button class="btn btn-outline-success" (click)="goToUploadDocument()">Загрузить</button>
       </div>
     </div>
 
-    <br>
+    <div class="col">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Поиск</span>
+        </div>
+        <input class="form-control" type="text" #searchString placeholder="Поиск по"/>
 
-    <h2 style="margin-left: 1%">Список документов</h2>
+        <select class="form-control" [(ngModel)]="typeSearch" (change)="selectionChange()">
+          <option [value]="types.Name">Названию</option>
+          <option [value]="types.Author">Автору</option>
+          <option [value]="types.TypeDoc">Типу</option>
+          <option [value]="types.Extension">Расширению</option>
+        </select>
+      </div>
+    </div>
 
-    <table class="table table-hover">
-      <thead class="thead-light">
-        <tr>
-          <th>Документ</th>
-          <th>Автор</th>
-          <th>Расширение</th>
-          <th class="text-center">Дата загрузки</th>
-          <th class="text-center">#</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let document of documents | paginate: {
+    <div class="col">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Сортировка</span>
+        </div>
+
+        <select class="form-control" [(ngModel)]="order" (change)="selectionChange()">
+          <option [value]="1">По названию</option>
+          <option [value]="2">По дате загрузки</option>
+        </select>
+
+        <select class="form-control" [(ngModel)]="ascending" (change)="selectionChange()">
+          <option [value]="true">Возрастанию</option>
+          <option [value]="false">Убыванию</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <h2 style="margin-left: 1%">Список документов</h2>
+
+  <table class="table table-hover">
+    <thead class="thead-light">
+    <tr>
+      <th>Документ</th>
+      <th>Автор</th>
+      <th>Расширение</th>
+      <th class="text-center">Дата загрузки</th>
+      <th class="text-center">#</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let document of documents | paginate: {
         itemsPerPage: 5, currentPage: p}">
-          <td><a (click)="editDocument(document)" style="cursor: pointer; color: deepskyblue">{{document.fileName}}</a></td>
-          <td>{{document.fileAuthor}}</td>
-          <td class="text-center">{{document.ext}}</td>
-          <td class="text-center">{{document.dateUploading}}</td>
-          <td class="text-center"><button class="btn btn-danger btn-sm" (click)="removeDocument(document)">Удалить</button></td>
-        </tr>
-      </tbody>
-    </table>
+      <td><a (click)="editDocument(document)" style="cursor: pointer; color: deepskyblue">{{document.fileName}}</a></td>
+      <td>{{document.fileAuthor}}</td>
+      <td class="text-center">{{document.ext}}</td>
+      <td class="text-center">{{document.dateUploading}}</td>
+      <td class="text-center">
+        <button class="btn btn-danger btn-sm" (click)="removeDocument(document)">Удалить</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
   <div class="form-row text-center">
     <div class="col-12">

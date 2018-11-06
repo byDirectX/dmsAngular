@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Doc } from '../model/doc';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DocumentService } from '../service/document.service';
-import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Doc} from '../model/doc';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {DocumentService} from '../service/document.service';
+import {Router} from '@angular/router';
+import {first} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 import {TypeDocService} from '../service/typedoc.service';
 import {TypeDoc} from '../model/typedoc';
 
 @Component({
-  selector: 'form-edit',
+  selector: 'app-form-edit',
   templateUrl: './form-edit.component.html',
   styleUrls: ['./form-edit.component.css']
 })
@@ -17,14 +17,28 @@ export class FormEditComponent implements OnInit {
 
   public doc: Doc;
   public editForm: FormGroup;
-  public hide: boolean;
   public typeDocArray: TypeDoc[];
   public typeDoc: TypeDoc = new TypeDoc();
 
-  constructor(private formBuilder: FormBuilder, private router: Router,
-    private documentService: DocumentService, private route: ActivatedRoute, private typeDocService: TypeDocService) { }
+  public constructor(private formBuilder: FormBuilder, private router: Router,
+                     private documentService: DocumentService, private route: ActivatedRoute, private typeDocService: TypeDocService) {
 
-  ngOnInit() {
+    this.editForm = this.formBuilder.group({
+      id: [],
+      fileName: ['', Validators.required],
+      fileAuthor: ['', Validators.required],
+      dateUploading: ['', Validators.required],
+      dateLastEditing: ['', Validators.required],
+      fileVersion: ['', Validators.required],
+      ext: ['', Validators.required],
+      filePath: ['', Validators.required],
+      size: ['', Validators.required],
+      typeDoc: ['', Validators.required],
+    });
+
+  }
+
+  public ngOnInit() {
     const documentId = this.route.snapshot.paramMap.get('docId');
 
     this.typeDocService.getTypeDocs().subscribe(data => {
@@ -40,34 +54,19 @@ export class FormEditComponent implements OnInit {
       return;
     }
 
-    this.editForm = this.formBuilder.group({
-      id: [],
-      fileName: ['', Validators.required],
-      fileAuthor: ['', Validators.required],
-      dateUploading: ['', Validators.required],
-      dateLastEditing: ['', Validators.required],
-      fileVersion: ['', Validators.required],
-      ext: ['', Validators.required],
-      filePath: ['', Validators.required],
-      size: ['', Validators.required],
-      typeDoc: ['', Validators.required],
-    });
-
     this.documentService.getDocument(+documentId)
       .subscribe(data => {
         this.editForm.setValue(data);
       });
   }
 
-  createTypeDoc() {
-    console.log('create typedoc: ' + this.typeDoc);
+  public createTypeDoc() {
     this.typeDocService.createTypeDoc(this.typeDoc).subscribe(data => {
-      alert('create typedoc succesfull');
     });
     this.typeDocArray.push(this.typeDoc);
   }
 
-  onSubmit() {
+  public onSubmit() {
     this.documentService.updateDocument(this.editForm.value)
       .pipe(first())
       .subscribe(data => {
@@ -78,9 +77,8 @@ export class FormEditComponent implements OnInit {
     window.location.reload();
   }
 
-  saveFile(document: Doc) {
+  public saveFile(document: Doc) {
     this.documentService.saveFile(document);
-    console.log(document.id + ' ' + document.ext);
   }
 
 }

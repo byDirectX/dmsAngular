@@ -6,13 +6,17 @@
       <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="fileAuthor">Автор файла</label>
-          <input class="form-control" formControlName="fileAuthor" placeholder="Автор" name="fileAuthor" id="fileAuthor" required>
-          <small id="fileAuthorHelp" class="form-text text-muted">Введите автора файла. Доступны символы кирилицы и латиницы, а так же цифры и пробел.</small>
+          <input class="form-control" formControlName="fileAuthor" placeholder="Автор" name="fileAuthor" id="fileAuthor"
+                 required/>
+          <small id="fileAuthorHelp" class="form-text text-muted">Введите автора файла. Доступны символы кирилицы и
+            латиницы, а так же цифры и пробел.
+          </small>
         </div>
 
         <div class="form-group">
           <label for="fileVersion">Версия файла</label>
-          <input class="form-control" formControlName="fileVersion" placeholder="Версия" name="fileVersion" id="fileVersion" required>
+          <input class="form-control" formControlName="fileVersion" placeholder="Версия" name="fileVersion"
+                 id="fileVersion" required>
         </div>
 
         <hr>
@@ -20,7 +24,9 @@
         <div class="form">
           <form>
             <div class="form-group">
-              <input class="form-control" type="text" [(ngModel)]="typeDoc.name" placeholder="Введите тип и нажмите на Enter" name="name" id="typeDocName" (keyup.enter)="createTypeDoc()" />
+              <input class="form-control" type="text" [(ngModel)]="typeDoc.name"
+                     placeholder="Введите тип и нажмите на Enter" name="name" id="typeDocName"
+                     (keyup.enter)="createTypeDoc()"/>
             </div>
           </form>
         </div>
@@ -39,8 +45,8 @@
     <div class="col">
       <h2>Поделиться</h2>
       <div>
-        <p>Ваш файл доступен для пользователей системы в общем списке файлов.<br>
-        Сохраните данную ссылку для скачивания и редактирования файла.</p>
+        <p>Ваш файл доступен для пользователей системы в общем списке.<br>
+          Сохраните данную ссылку для скачивания и редактирования файла.</p>
 
         <p><a href="http://localhost:4200/edit-document/{{doc.id}}">
           http://localhost:4200/edit-document/{{doc.id}}</a></p>

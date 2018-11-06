@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,21 +8,8 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   private title = 'Doc management system';
-  private description = 'System for managment document';
+  private description = 'System for management document';
 
-  constructor(private router: Router) {
+  public constructor(private router: Router) { }
 
-  }
-
-  goToListDocument() {
-    this.router.navigate(['list-document']);
-  }
-
-  goToAbout() {
-    this.router.navigate(['about']);
-  }
-
-  goToMainPage() {
-    this.router.navigate(['main']);
-  }
 }
