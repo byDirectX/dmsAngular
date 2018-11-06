@@ -40,6 +40,7 @@ export class ListDocumentComponent implements OnInit, OnDestroy {
     this.documentService.getDocuments('', this.typeSearch, this.order, this.ascending).subscribe(
       request => {
         this.documents = request;
+        console.log('request list documents: ' + request + ' ' + this.documents);
       }
     );
   }

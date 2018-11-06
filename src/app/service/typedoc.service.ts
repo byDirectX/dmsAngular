@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class TypeDocService {
 
-  private baseUrl = 'http://localhost:8080/typedoc';
+  private baseUrl = 'https://31.148.99.234:8443/dms';
 
   public constructor(private http: HttpClient) {
     console.log('Run service typedoc');

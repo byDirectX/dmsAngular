@@ -28,7 +28,6 @@ export class FormEditComponent implements OnInit {
       fileName: ['', Validators.required],
       fileAuthor: ['', Validators.required],
       dateUploading: ['', Validators.required],
-      dateLastEditing: ['', Validators.required],
       fileVersion: ['', Validators.required],
       ext: ['', Validators.required],
       filePath: ['', Validators.required],
@@ -45,8 +44,12 @@ export class FormEditComponent implements OnInit {
       this.typeDocArray = data;
     });
 
+    console.log('begin get document' + documentId);
     this.documentService.getDocument(+documentId)
-      .subscribe(data => this.doc = data);
+      .subscribe(data => {
+        this.doc = data
+        console.log('document: ' + data);
+      });
 
     if (!documentId) {
       alert('Возникла критическая ошибка!');

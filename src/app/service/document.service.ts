@@ -9,7 +9,7 @@ import {map, tap} from 'rxjs/operators';
 })
 export class DocumentService {
 
-  private baseUrl = 'http://localhost:8080/documents';
+  private baseUrl = 'https://31.148.99.234:8443/dms';
 
   public constructor(private http: HttpClient) {
     console.log('Run service documents');

@@ -61,7 +61,7 @@
       <td><a (click)="editDocument(document)" style="cursor: pointer; color: deepskyblue">{{document.fileName}}</a></td>
       <td>{{document.fileAuthor}}</td>
       <td class="text-center">{{document.ext}}</td>
-      <td class="text-center">{{document.dateUploading}}</td>
+      <td class="text-center">{{document.dateUploading | date: 'dd-MM-yyyy'}}</td>
       <td class="text-center">
         <button class="btn btn-danger btn-sm" (click)="removeDocument(document)">Удалить</button>
       </td>

@@ -2,8 +2,7 @@ export class Doc {
   id: number;
   fileName: string;
   fileAuthor: string;
-  dateUploading: Date;
-  dateLastEditing: Date;
+  dateUploading: number;
   fileVersion: number;
   ext: string;
   filePath: string;

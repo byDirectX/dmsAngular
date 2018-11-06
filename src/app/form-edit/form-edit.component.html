@@ -57,7 +57,7 @@
         <p>Файл: {{doc.fileName+doc.ext}}<br>
           Автор файла: {{doc.fileAuthor}}<br>
           Версия файла: {{doc.fileVersion}}<br>
-          Дата загрузки: {{doc.dateUploading}}<br>
+          Дата загрузки: {{doc.dateUploading | date: 'dd-MM-yy hh:mm:ss'}}<br>
           Размер файла: {{doc.size}} MB</p>
       </div>
 
