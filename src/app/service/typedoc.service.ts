@@ -9,7 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class TypeDocService {
 
-  private baseUrl = 'http://31.148.99.234:8080/typedoc';
+  private baseUrl = 'https://31.148.99.234:8443/typedoc';
 
   public constructor(private http: HttpClient) {
     console.log('Run service typedoc');
@@ -21,6 +21,10 @@ export class TypeDocService {
 
   public getTypeDoc(id: number): Observable<TypeDoc> {
     return this.http.get<TypeDoc>(`${this.baseUrl}/edit/${id}`);
+  }
+
+  public getTypeDocByName(name: string): Observable<TypeDoc> {
+    return this.http.get<TypeDoc>(`${this.baseUrl}/get/${name}`);
   }
 
   public createTypeDoc(typeDoc) {

@@ -39,7 +39,9 @@ export class FormUploadComponent implements OnInit {
   public createTypeDoc() {
     this.typeDocService.createTypeDoc(this.typeDoc).subscribe(data => {
     });
-    this.typeDocArray.push(this.typeDoc);
+    this.typeDocService.getTypeDocByName(this.typeDoc.name).subscribe(data => {
+      this.typeDocArray.push(data);
+    });
   }
 
   public selectFile(event) {
