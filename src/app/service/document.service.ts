@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpEvent, HttpRequest} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Doc} from '../model/doc';
 import {Observable} from 'rxjs';
 import {map, tap} from 'rxjs/operators';
@@ -9,7 +9,7 @@ import {map, tap} from 'rxjs/operators';
 })
 export class DocumentService {
 
-  private baseUrl = 'http://localhost:8080/documents';
+  private baseUrl = 'http://31.148.99.234:8080/documents';
 
   public constructor(private http: HttpClient) {
     console.log('Run service documents');
