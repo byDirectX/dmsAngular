@@ -8,8 +8,8 @@ TypeScript 2,
 Angular 6,
 Bootstrap,
 
-Visual Studio Code,
-Intellij WebStorm
+VSCode,
+WebStorm
 
 # Deploy
 
