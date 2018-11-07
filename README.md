@@ -1,4 +1,4 @@
-# Document Managment System
+# Document Management System
 
 Front-End часть системы, предназначенной для хранения и управления файлами.
 
