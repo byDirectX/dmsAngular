@@ -4,11 +4,11 @@ Front-End часть системы, предназначенной для хр�
 
 # Used technologies
 
-TypeScript 2
-Angular 6
-Bootstrap
+TypeScript 2,
+Angular 6,
+Bootstrap,
 
-Visual Studio Code
+Visual Studio Code,
 Intellij WebStorm
 
 # Deploy
