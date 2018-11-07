@@ -36,7 +36,7 @@
       <label for="author">Укажите автора файла</label>
       <input class="form-control" type="text" placeholder="Автор файла" id="author" [formControl]="author" required/>
       <div class="alert alert-danger"
-           *ngIf="author.invalid && author.touched">
+           *ngIf="(author.invalid && author.touched) || author.value.length > 20">
         Имя указано неверно
       </div>
     </div>

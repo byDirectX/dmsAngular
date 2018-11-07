@@ -4,6 +4,7 @@ import {DocumentService} from '../service/document.service';
 import {Doc} from '../model/doc';
 import {fromEvent, Subject} from 'rxjs';
 import {filter, debounceTime, distinctUntilChanged, mergeMap, takeUntil} from 'rxjs/operators';
+import {HttpHeaders} from '@angular/common/http';
 
 enum Types {
   Name = 1,

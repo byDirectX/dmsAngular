@@ -2,14 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Doc} from '../model/doc';
 import {Observable} from 'rxjs';
-import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentService {
 
-  private baseUrl = 'https://31.148.99.234:8443/dms';
+  private baseUrl = 'http://localhost:8080/documents';
 
   public constructor(private http: HttpClient) {
     console.log('Run service documents');
